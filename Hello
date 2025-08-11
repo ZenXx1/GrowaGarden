@@ -1,0 +1,69 @@
+-- OMG HUB Loading Screen
+-- Put this in StarterGui as a LocalScript
+
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.IgnoreGuiInset = true
+ScreenGui.ResetOnSpawn = false
+
+-- Background
+local BG = Instance.new("Frame")
+BG.Size = UDim2.new(1,0,1,0)
+BG.BackgroundColor3 = Color3.fromRGB(0,0,0)
+BG.Parent = ScreenGui
+
+-- Title
+local Title = Instance.new("TextLabel")
+Title.AnchorPoint = Vector2.new(0.5, 0)
+Title.Position = UDim2.new(0.5, 0, 0.15, 0)
+Title.Size = UDim2.new(0, 300, 0, 50)
+Title.BackgroundTransparency = 1
+Title.Text = "OMG HUB\nLoading: 0%"
+Title.Font = Enum.Font.GothamBold
+Title.TextScaled = true
+Title.TextColor3 = Color3.fromRGB(255,255,255)
+Title.Parent = BG
+
+-- Pancake Icon
+local Icon = Instance.new("ImageLabel")
+Icon.Size = UDim2.new(0, 64, 0, 64)
+Icon.Position = UDim2.new(0.1, 0, 0.5, -32)
+Icon.BackgroundTransparency = 1
+Icon.Image = "rbxassetid://11733196258" -- Pancake face
+Icon.Parent = BG
+
+-- Progress Bar Background
+local BarBG = Instance.new("Frame")
+BarBG.Size = UDim2.new(0.7, 0, 0.05, 0)
+BarBG.Position = UDim2.new(0.15, 0, 0.5, 0)
+BarBG.BackgroundColor3 = Color3.fromRGB(40,40,40)
+BarBG.BorderSizePixel = 0
+BarBG.Parent = BG
+
+-- Progress Bar Fill
+local BarFill = Instance.new("Frame")
+BarFill.Size = UDim2.new(0,0,1,0)
+BarFill.BackgroundColor3 = Color3.fromRGB(255,0,128) -- Pink
+BarFill.BorderSizePixel = 0
+BarFill.Parent = BarBG
+
+-- Loading Text
+local LoadingText = Instance.new("TextLabel")
+LoadingText.AnchorPoint = Vector2.new(0.5, 0)
+LoadingText.Position = UDim2.new(0.5, 0, 0.58, 0)
+LoadingText.Size = UDim2.new(0, 400, 0, 50)
+LoadingText.BackgroundTransparency = 1
+LoadingText.Text = "OMG HUB BYPASSING"
+LoadingText.Font = Enum.Font.GothamBold
+LoadingText.TextScaled = true
+LoadingText.TextColor3 = Color3.fromRGB(255,255,255)
+LoadingText.Parent = BG
+
+-- Fake loading
+for i = 1, 100 do
+    Title.Text = "OMG HUB\nLoading: "..i.."%"
+    BarFill.Size = UDim2.new(i/100, 0, 1, 0)
+    wait(0.05) -- speed of loading
+end
+
+BG:Destroy() -- remove loading screen after complete
