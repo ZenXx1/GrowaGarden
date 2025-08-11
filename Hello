@@ -1,7 +1,8 @@
--- OMG HUB Loading Screen with Circle Loader
+-- OMG HUB Loading Screen with Circle Loader + White Fade
 -- Put this in StarterGui as a LocalScript
 
 local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
 local player = Players.LocalPlayer
 
 local ScreenGui = Instance.new("ScreenGui")
@@ -92,4 +93,18 @@ spawn(function()
 end)
 
 wait(30) -- Show spinner for 30 seconds
-BG:Destroy()
+
+-- White fade overlay
+local FadeWhite = Instance.new("Frame")
+FadeWhite.Size = UDim2.new(1,0,1,0)
+FadeWhite.BackgroundColor3 = Color3.fromRGB(255,255,255)
+FadeWhite.BackgroundTransparency = 1
+FadeWhite.ZIndex = 10
+FadeWhite.Parent = ScreenGui
+
+local fadeTween = TweenService:Create(FadeWhite, TweenInfo.new(2), {BackgroundTransparency = 0})
+fadeTween:Play()
+fadeTween.Completed:Wait()
+
+wait(0.5) -- Short pause on white screen
+ScreenGui:Destroy()
