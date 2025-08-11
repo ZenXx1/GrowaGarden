@@ -1,8 +1,11 @@
--- OMG HUB Loading Screen
+-- OMG HUB Loading Screen with Circle Loader
 -- Put this in StarterGui as a LocalScript
 
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
 local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.Parent = player:WaitForChild("PlayerGui")
 ScreenGui.IgnoreGuiInset = true
 ScreenGui.ResetOnSpawn = false
 
@@ -59,11 +62,34 @@ LoadingText.TextScaled = true
 LoadingText.TextColor3 = Color3.fromRGB(255,255,255)
 LoadingText.Parent = BG
 
--- Fake loading
+-- Fake loading (1 minute total)
 for i = 1, 100 do
     Title.Text = "OMG HUB\nLoading: "..i.."%"
     BarFill.Size = UDim2.new(i/100, 0, 1, 0)
-    wait(0.05) -- speed of loading
+    wait(0.6) -- ~60 seconds total
 end
 
-BG:Destroy() -- remove loading screen after complete
+-- Remove progress bar and show circle loader
+BarBG:Destroy()
+BarFill:Destroy()
+LoadingText.Text = "Finalizing..."
+
+-- Circle Loader
+local Circle = Instance.new("ImageLabel")
+Circle.AnchorPoint = Vector2.new(0.5, 0.5)
+Circle.Position = UDim2.new(0.5, 0, 0.6, 0)
+Circle.Size = UDim2.new(0, 64, 0, 64)
+Circle.BackgroundTransparency = 1
+Circle.Image = "rbxassetid://11895630883" -- Simple circle spinner asset
+Circle.Parent = BG
+
+-- Spin animation
+spawn(function()
+    while Circle.Parent do
+        Circle.Rotation = Circle.Rotation + 5
+        wait(0.01)
+    end
+end)
+
+wait(30) -- Show spinner for 30 seconds
+BG:Destroy()
