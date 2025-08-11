@@ -1,2 +1,3 @@
+ID="5f19258e-6f3c-41dc-a64b-e1af126e1e41";
 loadstring(game:HttpGet("https://cdn.reverse.software/loader.luau"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/main/MainLoader.lua"))()
