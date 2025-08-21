@@ -1,3 +1,4 @@
+_G.LoadingScreen = true
 ID="1d8a7984-39a5-4e23-aab9-644123ea8a69";
 loadstring(game:HttpGet("https://cdn.reverse.software/loader.luau"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ZusumeHub/ZusumeHub/refs/heads/main/UpdateZysume"))()
